@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "parrot1",
+    "image": "./img/parrot1.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "parrot2",
+    "image": "./img/parrot2.jpeg" 
+  },
+  {
+    "id": 3,
+    "name": "parrot3",
+    "image": "./img/parrot3.jpeg"
+  },
+  {
+    "id": 4,
+    "name": "parrot4",
+    "image": "./img/parrot4.jpeg"
+  },
+  {
+    "id": 5,
+    "name": "parrot5",
+    "image": "./img/parrot5.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "parrot6",
+    "image": "./img/parrot6.jpeg"
+  },
+  {
+    "id": 7,
+    "name": "parrot7",
+    "image": "./img/parrot7.jpeg"
+  },
+  {
+    "id": 8,
+    "name": "parrot8",
+    "image": "./img/parrot8.jpeg"
+  },
+  {
+    "id": 9,
+    "name": "parrot9",
+    "image": "./img/parrot9.jpeg"
+  },
+  {
+    "id": 10,
+    "name": "parrot10",
+    "image": "./img/parrot10.jpeg"
+  },
+  {
+    "id": 11,
+    "name": "parrot11",
+    "image": "./img/parrot11.jpeg"
+  },
+  {
+    "id": 12,
+    "name": "parrot12",
+    "image": "./img/parrot12.jpeg"
+  }
+]

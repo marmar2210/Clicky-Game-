@@ -1,61 +1,85 @@
 import React, { Component } from "react";
-import Card from "./components/Card";
-import Wrapper from "./components/Wrapper";
+import ParrotCard from "./components/ParrotCard/parrot";
 import Header from "./components/Header";
-import cards from "./cards.json";
-import "./App.css";
+import Wrapper from "./components/Wrapper";
+import Title from "./components/Title";
+import parrots from "./parrots.json";
 
 class App extends Component {
-  // Setting this.state.cards to the cards json array
   state = {
-    cards,
+    parrots,
+    clickedParrotIDs: [],
     score: 0,
-    highscore: 0
+    topScore: 12,
+    status: ""
   };
 
-  gameOver = () => {
-    if (this.state.score > this.state.highscore) {
-      this.setState({ highscore: this.state.score }, function() {
-        console.log(this.state.highscore);
+  shuffle = id => {
+    console.log("CAW CAW");
+    let clickedParrotIDs = this.state.clickedParrotIDs;
+
+    if (clickedParrotIDs.includes(id)) {
+      this.setState({
+        clickedParrotIDs: [],
+        score: 0,
+        status: "Click on an image to try again."
       });
+      return;
+    } else {
+      clickedParrotIDs.push(id);
     }
-    this.state.cards.forEach(card => {
-      card.count = 0;
+
+    if (clickedParrotIDs.length === this.state.parrots.length) {
+      this.setState({
+        score: 0,
+        clickedParrotIDs: []
+      });
+      alert("You won!");
+      return;
+    }
+
+    this.setState({
+      parrots,
+      clickedParrotIDs,
+      score: clickedParrotIDs.length,
+      status: ""
     });
-    alert(`Game Over :( \nscore: ${this.state.score}`);
-    this.setState({ score: 0 });
-    return true;
+
+    var i = 0,
+      j = 0,
+      temp = null;
+
+    for (i = parrots.length - 1; i > 0; i -= 1) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = parrots[i];
+      parrots[i] = parrots[j];
+      parrots[j] = temp;
+    }
   };
 
-  clickCount = id => {
-    this.state.cards.find((o, i) => {
-      if (o.id === id) {
-        if (cards[i].count === 0) {
-          cards[i].count = cards[i].count + 1;
-          this.setState({ score: this.state.score + 1 }, function() {
-            console.log(this.state.score);
-          });
-          this.state.cards.sort(() => Math.random() - 0.5);
-          return true;
-        } else {
-          this.gameOver();
-        }
-      }
-    });
-  };
-  // Map over this.state.cards and render a cardCard component for each card object
   render() {
     return (
       <Wrapper>
-        <Header score={this.state.score} highscore={this.state.highscore}>
-          Clicky Game
+        <Header>
+          <p style={{ textAlign: "center" }}>
+            Test your memory! You can only click an image once. Score of 12 wins
+            the game.
+          </p>
+          <h2 style={{ textAlign: "center" }}>
+            Score: {this.state.score} | Score to meet: {this.state.topScore}
+          </h2>
+          <h3 style={{ textAlign: "center", color: "red" }}>
+            {this.state.status}
+          </h3>
         </Header>
-        {this.state.cards.map(card => (
-          <Card
-            clickCount={this.clickCount}
-            id={card.id}
-            key={card.id}
-            image={card.image}
+        <Title>Clicky Parrot Shuffle</Title>
+        {this.state.parrots.map(parrot => (
+          <ParrotCard
+            shuffle={this.shuffle}
+            id={parrot.id}
+            key={parrot.id}
+            // name={parrot.name}
+            image={parrot.image}
           />
         ))}
       </Wrapper>
